@@ -3,20 +3,20 @@
         <div class="activity-des">
             <h1>The Easiest Way To</h1>
             <div class="list">
-                
-                        <h2>Find venues</h2>
-                        <h2>Invite Friends</h2>
-                        <h2>& Enjoy</h2>
+
+                <h2>Find venues</h2>
+                <h2>Invite Friends</h2>
+                <h2>& Enjoy</h2>
             </div>
         </div>
         <div class="description">
-        <h2>Booking Now Made A Lot Easier!</h2><br><br>
-        <a href="#book"> Book Now</a>
-    </div>
+            <h2>Booking Now Made A Lot Easier!</h2><br><br>
+            <a href="#book"> Book Now</a>
+        </div>
     </div>
 
 
-    
+
 
     <div class="contact" id="contact">
         <div class="contact-about">
@@ -56,5 +56,26 @@
     function hideMenu() {
         navLinks.style.display = "none";
         navLinks.style.right = "-200px";
+    }
+    // Check if the URL contains the bookSuccess parameter
+    var urlParams = new URLSearchParams(window.location.search);
+    var bookSuccess = urlParams.get('bookSuccess');
+
+    // If bookSuccess is true, display the modal
+    if (bookSuccess === 'true') {
+        // Show the bookingSuccessModal
+        var modal = document.getElementById("bookingSuccessModal");
+        modal.style.display = "block";
+
+        // Close the modal when the close button or modal overlay is clicked
+        var closeButton = modal.querySelector(".close");
+        closeButton.addEventListener("click", function() {
+            modal.style.display = "none";
+        });
+        window.addEventListener("click", function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        });
     }
 </script>

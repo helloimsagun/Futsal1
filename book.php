@@ -1,3 +1,16 @@
+<!-- Place this HTML code in your index.php file -->
+<div id="bookingSuccessModal" class="modal d-flex align-items-center justify-content-center">
+    <div class="modal-dialog" id="bookingSuccessModal1">
+        <div class="modal-content">
+            <button class="close">&times;</button>
+            <h2>Booking Success!</h2>
+            <p>Your booking has been successfully confirmed.</p>
+            <p>Thank you for choosing our service.</p>
+        </div>
+    </div>
+</div>
+
+
 <section class="page-section" id="book" style="padding-top: 10em;">
     <div class="container">
         <div class="card">
@@ -25,6 +38,7 @@
                 } ?>
             </div>
         </div>
+
         <div class="card">
             <div class="card-header">
                 <img src="images/field-2.jpg" alt="rover" />
