@@ -1,4 +1,4 @@
-DROP DATABASE futsal;
+DROP DATABASE IF EXISTS futsal;
 CREATE DATABASE futsal;
 USE futsal;
 SET time_zone = "+05:40";
