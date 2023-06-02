@@ -6,6 +6,10 @@ include '_dbconnect.php';
 if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     $fieldid = $_POST['fieldid'];
     $typeid = $_POST['typeid'];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $number = $_POST['number'];
+    $date = $_POST['date'];
 }
 ?>
 <!DOCTYPE html>
@@ -52,38 +56,43 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
                 <form class="form-detail" action="dobook.php" method="post">
                     <h2>Book Online</h2>
-                    <input type="hidden" value='<?php echo $_POST['fieldid']; ?>' name="fieldid">
-                    <input type="hidden" value='<?php echo $_POST['typeid']; ?>' name="typeid">
-                    <div class="form-field">
-                        <p>Your Name</p>
-                        <input type="text" name="name" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-field">
-                        <p>Your Email</p>
-                        <input type="email" name="email" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-field">
-                        <p>Your Number</p>
-                        <input type="text" name="number" placeholder="Your Number" required>
-                    </div>
-                    <div class="form-field">
-                        <p>Date</p>
-                        <input type="date" name="date" required min="<?php echo date('Y-m-d'); ?>">
-                    </div>
+                    <input type="hidden" value='<?php echo $fieldid; ?>' name="fieldid">
+                    <input type="hidden" value='<?php echo $typeid; ?>' name="typeid">
+                    <input type="hidden" value='<?php echo $name; ?>' name="name">
+                    <input type="hidden" value='<?php echo $email; ?>' name="email">
+                    <input type="hidden" value='<?php echo $number; ?>' name="number">
+                    <input type="hidden" value='<?php echo $date; ?>' name="date">
                     <div class="form-field">
                         <p>Time</p>
                         <select name="time" id="#" required>
                             <?php
                             $startTime = strtotime('7AM');
-                            $endTime = strtotime('8PM');
+                            $endTime = strtotime('7PM');
+
                             while ($startTime <= $endTime) {
                                 $optionTime = date('gA', $startTime);
                                 $nextTime = strtotime('+1 hour', $startTime);
                                 $optionEndTime = date('gA', $nextTime);
-                                echo "<option value=\"$optionTime-$optionEndTime\">$optionTime - $optionEndTime</option>";
+
+                                // Check if the time slot is already in the database
+                                $query = "SELECT * FROM booking WHERE time = '$optionTime-$optionEndTime' AND date='$date' AND fieldid=$fieldid";
+                                $result = mysqli_query($con, $query);
+
+                                if (mysqli_num_rows($result) == 0) {
+                                    // Check if the date is today and time is one hour after the current time
+                                    if ($date === date('Y-m-d') && $nextTime >= strtotime('+4 hour')) {
+                                        echo "<option value=\"$optionTime-$optionEndTime\">$optionTime - $optionEndTime</option>";
+                                    } elseif ($date !== date('Y-m-d')) {
+                                        echo "<option value=\"$optionTime-$optionEndTime\">$optionTime - $optionEndTime</option>";
+                                    }
+                                }
+
                                 $startTime = $nextTime;
                             }
                             ?>
+
+
+
                         </select>
                     </div>
                     <button class="submit">Book Now</button>

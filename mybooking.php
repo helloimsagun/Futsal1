@@ -19,7 +19,9 @@ session_start();
             border-collapse: collapse;
         }
 
-        .table-bordered,td,th {
+        .table-bordered,
+        td,
+        th {
             border: 1px solid #ddd;
             padding: 2em;
         }
@@ -31,7 +33,7 @@ session_start();
 </head>
 
 <body>
-<?php include 'nav.php'?>
+    <?php include 'nav.php' ?>
 
 
     <div style="padding-top: 10em;" class="container">
@@ -43,7 +45,7 @@ session_start();
                         <?php
                         require_once "components/_dbconnect.php";
 
-                        $sql = "SELECT id, name, email , number, date, time FROM booking WHERE userid = '$userid'";
+                        $sql = "SELECT id, name, email , number, date, time,fieldid,price FROM booking WHERE userid = '$userid'";
                         if ($result = mysqli_query($con, $sql)) {
                             if (mysqli_num_rows($result) > 0) {
                                 echo '<table class="table table-bordered table-striped table-centered">';
@@ -55,6 +57,8 @@ session_start();
                                 echo "<th>Phone</th>";
                                 echo "<th>Date</th>";
                                 echo "<th>Time</th>";
+                                echo "<th>Field</th>";
+                                echo "<th>Price</th>";
                                 echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
@@ -66,8 +70,10 @@ session_start();
                                     echo "<td>" . $row['number'] . "</td>";
                                     echo "<td>" . $row['date'] . "</td>";
                                     echo "<td>" . $row['time'] . "</td>";
+                                    echo "<td>Field-" . $row['fieldid'] . "</td>";
+                                    echo "<td>" . $row['price'] . "</td>";
                                     echo "<td>";
-                                    echo '<a href="delete.php?id=' . $row['id'] . '" title="Delete" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                    echo '<a href="components/delete.php?id=' . $row['id'] . '" title="Delete" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
                                     echo "</td>";
                                     echo "</tr>";
                                 }
@@ -87,7 +93,21 @@ session_start();
             </div>
         </div>
     </div>
-
+    <div class="modal fade" id="successDeleteModal" tabindex="-1" role="dialog" aria-labelledby="successDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successDeleteModalLabel">Deletion Successful</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close" onclick="closesuccessDeleteModal()">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Record deleted successfully
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         var navLinks = document.getElementById("navLinks");
@@ -103,3 +123,8 @@ session_start();
             navLinks.style.right = "-200px";
         }
     </script>
+    <script src="scripts/modal.js"></script>
+
+</body>
+
+</html>
