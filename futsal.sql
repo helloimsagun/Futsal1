@@ -30,3 +30,4 @@ INSERT INTO `register` (`id`, `userid`, `email`, `password`, `cpassword`) VALUES
 (1, 'nischal', 'nischalrzbsnt0@gmail.com', 'nischal', 'nischal'),
 (2, 'test', 'test@test.com', 'test123', 'test123'),
 (3, 'sagun', 'ghimireshawgun23@gmail.com', '123456', '123456');
+ -- Hello
