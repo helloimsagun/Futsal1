@@ -1,6 +1,6 @@
-<section class="page-section" id="book" style="padding-top: 10em;">
+<section class="page-section section-bg" id="book" style="padding-top: 10em;">
     <div class="container">
-        <div class="card">
+        <div class="card" data-aos="fade-left" data-aos-delay="500">
             <div class="card-header">
                 <img src="images/field-1.jpg" alt="rover" />
             </div>
@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card" data-aos="fade-down" data-aos-delay="100">
             <div class="card-header">
                 <img src="images/field-2.jpg" alt="rover" />
             </div>
@@ -51,7 +51,7 @@
                 } ?>
             </div>
         </div>
-        <div class="card">
+        <div class="card" data-aos="fade-down" data-aos-delay="100">
             <div class="card-header">
                 <img src="images/field-3.jpg" alt="rover" />
             </div>
@@ -76,7 +76,7 @@
                 } ?>
             </div>
         </div>
-        <div class="card">
+        <div class="card" data-aos="fade-right" data-aos-delay="500">
             <div class="card-header">
                 <img src="images/field-4.jpg" alt="rover" />
             </div>
