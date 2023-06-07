@@ -10,7 +10,7 @@
 
 nav {
     position: sticky;
-    background-color: #111;
+    /* background-color: #111; */
     display: flex;
     padding: 15px 6%;
     justify-content: space-between;
