@@ -36,10 +36,6 @@
                             <a href="https://www.instagram.com/shaw__gun"><i class="bi bi-instagram"></i></a>
                         </div>
                     </div>
-                    <div class="member-info">
-                        <h4>Sagun Ghimire</h4>
-                        <span>Chief Executive Officer</span>
-                    </div>
                 </div>
             </div>
 
@@ -52,10 +48,7 @@
                             <a href="https://www.instagram.com/nischalraz_basnet/"><i class="bi bi-instagram"></i></a>
                         </div>
                     </div>
-                    <div class="member-info">
-                        <h4>Nischal Raz Basnet</h4>
-                        <span>Futsal Manager</span>
-                    </div>
+
                 </div>
             </div>
         </div>

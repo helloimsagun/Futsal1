@@ -6,9 +6,6 @@ include '_dbconnect.php';
 if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     $fieldid = $_POST['fieldid'];
     $typeid = $_POST['typeid'];
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $number = $_POST['number'];
     $date = $_POST['date'];
 }
 ?>
@@ -63,6 +60,19 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
                     <input type="hidden" value='<?php echo $number; ?>' name="number">
                     <input type="hidden" value='<?php echo $date; ?>' name="date">
                     <div class="form-field">
+                        <p>Your Name</p>
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-field">
+                        <p>Your Email</p>
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-field">
+                        <p>Your Number</p>
+                        <input type="text" name="number" placeholder="Your Number" required>
+                    </div>
+
+                    <div class="form-field">
                         <p>Time</p>
                         <select name="time" id="#" required>
                             <?php
@@ -80,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
                                 if (mysqli_num_rows($result) == 0) {
                                     // Check if the date is today and time is one hour after the current time
-                                    if ($date === date('Y-m-d') && $nextTime >= strtotime('+4 hour')) {
+                                    if ($date === date('Y-m-d') && $nextTime >= strtotime('+4 hour + 45 minutes')) {
                                         echo "<option value=\"$optionTime-$optionEndTime\">$optionTime - $optionEndTime</option>";
                                     } elseif ($date !== date('Y-m-d')) {
                                         echo "<option value=\"$optionTime-$optionEndTime\">$optionTime - $optionEndTime</option>";

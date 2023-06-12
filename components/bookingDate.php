@@ -5,7 +5,6 @@ include '_dbconnect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     $fieldid = $_POST['fieldid'];
-    $typeid = $_POST['typeid'];
 }
 ?>
 <!DOCTYPE html>
@@ -27,6 +26,10 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
                     <a href="../index.php#book" class="close-btn3">Back</a>
                     <h2>TIME OPEN</h2>
                     <?php
+                    $sql = "SELECT * FROM futsals where id='$fieldid'";
+                    $result = mysqli_query($con, $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    $typeid = $row['type'];
                     if ($typeid == '5A') {
                         echo '<h3>Sunday - Friday</h3>
                         <p>Day (7am - 5pm) = Rs.1,000</p>
@@ -43,32 +46,64 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
                         <p>Night (5pm - 8pm) = Rs.1,500</p>';
                     }
                     ?>
+
                     <hr>
                     <h4>Call Us: 01-5017320, 01-5017321</h4>
                 </div>
 
             </div>
             <div class="booking-form">
-
                 <form class="form-detail" action="bookingTime.php" method="post">
                     <h2>Book Online</h2>
                     <input type="hidden" value='<?php echo $fieldid; ?>' name="fieldid">
                     <input type="hidden" value='<?php echo $typeid; ?>' name="typeid">
+                    <!-- Similar Button -->
+                    <button class="submit" type="button" onclick="window.location.href='../simarity.php?id=<?php echo $fieldid; ?>'">Similar Futsal</button>
+
+                    <?php
+                    // Execute the SQL query to fetch futsal fields data
+                    $sql = "SELECT * FROM futsals where id='$fieldid'";
+                    $result = mysqli_query($con, $sql);
+
+                    // Loop through the results and generate HTML dynamically
+                    $row = mysqli_fetch_assoc($result);
+                    $name = $row['name'];
+                    $type = $row['type'];
+                    $fieldId = $row['id'];
+                    $address = $row['address'];
+                    $phone = $row['phone'];
+                    $description = $row['description'];
+                    echo '
+                        <p><b>Futsal Name</b>: ' . $name . '</p>
+                        <p><b>Futsal Type</b>: ' . $type . '</p>
+                        <p><b>Phone</b>: ' . $phone . '</p>
+
+                        <p>' . $address . '</p>
+                ';
+                    // Retrieve and display the attributes
+                    $sqlAttributes = "SELECT attribute, value FROM futsal_attributes WHERE futsalid = $fieldid";
+                    $resultAttributes = mysqli_query($con, $sqlAttributes);
+
+                    if (mysqli_num_rows($resultAttributes) > 0) {
+                        echo '<p><b>Attributes:</b></p>';
+
+                        while ($rowAttribute = mysqli_fetch_assoc($resultAttributes)) {
+                            $attribute = $rowAttribute['attribute'];
+                            $value = $rowAttribute['value'];
+                            if($value == 1){
+                                echo  $attribute.'  ';
+                            }
+                            // echo  $attribute . ': ' . ($value ? 'Yes' : 'No');
+                        }
+
+                    } else {
+                        echo '<p>No attributes found.</p>';
+                    }
+                    ?>
+
                     <div class="form-field">
-                        <p>Your Name</p>
-                        <input type="text" name="name" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-field">
-                        <p>Your Email</p>
-                        <input type="email" name="email" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-field">
-                        <p>Your Number</p>
-                        <input type="text" name="number" placeholder="Your Number" required>
-                    </div>
-                    <div class="form-field">
-                        <p>Date</p>
-                        <input type="date" name="date" required min="<?php echo date('Y-m-d'); ?>">
+                        <label for="date"><b>Date</b></label>
+                        <input type="date" name="date" id="date" class="form-control" required min="<?php echo date('Y-m-d'); ?>">
                     </div>
                     <button class="submit">Next</button>
                 </form>

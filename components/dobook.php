@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
         }
     }
 
-    $reg = "INSERT INTO booking (userid, name, email, number, date, time, price,fieldid,typeid) VALUES ('$userid', '$name', '$email', '$number', '$date', '$time', '$price', '$fieldid','$typeid') ";
+    $reg = "INSERT INTO booking (userid, name, email, phone, date, time, price,fieldid) VALUES ('$userid', '$name', '$email', '$number', '$date', '$time', '$price', '$fieldid') ";
 
     mysqli_query($con, $reg);
     header("Location: ../index.php?bookSuccess=true#book");

@@ -11,6 +11,17 @@
           <li><a class="nav-link scrollto active" href="index.php#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="index.php#book">Book</a></li>
           <li><a class="nav-link scrollto" href="index.php#about">About</a></li>
+          <li><a class="nav-link scrollto" href="index.php#team">Team</a></li>
+          <?php
+          if (isset($_SESSION['userid'])) {
+            if ($_SESSION['type'] == 'admin') {
+              echo '<li><a class="nav-link scrollto" href="admin_dashboard.php">Admin</a></li>';
+            }else{
+              echo '<li><a class="nav-link scrollto" href="dashboard.php">Dashboard</a></li>';
+            }
+        }
+        ?>
+
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -22,10 +33,10 @@
         <a href="components/login.php" class="get-started-btn scrollto">Sign In</a>
         </div>';
         } else {
-            $userid = $_SESSION['userid'];
-            echo "<div class='logout text-center get-started-btn scrollto'> <p style='color:white'>Welcome $userid</p>
-        <a href='components/logout.php'>Log out</a>
-        </div>";
+            $username = $_SESSION['username'];
+            echo "<a href='components/logout.php'><div class='logout text-center get-started-btn scrollto'> <p style='color:white'>Welcome $username(". $_SESSION['type'] .")</p>
+       Log out
+        </div></a>";
         }
         ?>
     </div>
