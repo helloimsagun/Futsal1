@@ -10,7 +10,7 @@ if($_SERVER["REQUEST_METHOD"]== 'POST')
   $email = $_POST['email'];
   $password = $_POST['password'];
   $cpassword = $_POST['cpassword'];
-  $s = "select * from register where userid = '$userid'";
+  $s = "select * from users where username = '$userid'";
   $result = mysqli_query($con, $s);
 
   $num = mysqli_num_rows($result);
@@ -19,7 +19,7 @@ if($_SERVER["REQUEST_METHOD"]== 'POST')
    //echo "userid already exist";
   }
   else{
-    $reg= "insert into register(userid, email, password, cpassword) values('$userid', '$email', '$password', '$cpassword') ";
+    $reg= "insert into users(username, email, password) values('$userid', '$email', '$password') ";
   
   if($password!=$cpassword)
   {
@@ -67,7 +67,7 @@ p2 {
                 <form id="register" class="input-group2" action="register.php" method="post">
                     <div class="input-field">
                         <i class="fa fa-user" aria-hidden="true"></i>
-                        <input type="text" name="userid" class="field" placeholder="User ID" required>
+                        <input type="text" name="userid" class="field" placeholder="User Name" required>
                     </div>
                     <div class="input-field">
                         <i class="fa fa-envelope" aria-hidden="true"></i>
