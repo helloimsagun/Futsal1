@@ -113,7 +113,7 @@ CREATE TABLE
         `date` date NOT NULL,
         `price` int NOT NULL,
         `time` varchar(30) NOT NULL,
-        `status` ENUM('Pending', 'Completed', 'Rejected') NOT NULL DEFAULT 'Pending',
+        `status` ENUM('Pending', 'Completed', 'Rejected','Cancelled') NOT NULL DEFAULT 'Pending',
         FOREIGN KEY (`fieldid`) REFERENCES `futsals` (`id`),
         FOREIGN KEY (`userid`) REFERENCES `users` (`id`)
     );

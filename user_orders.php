@@ -149,6 +149,7 @@ $userId = $_SESSION['userid'];
                                     <th>Price</th>
                                     <th>Time</th>
                                     <th>Status</th>
+                                    <th>Cancel</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -182,6 +183,13 @@ $userId = $_SESSION['userid'];
                                     echo "<td>$price</td>";
                                     echo "<td>$time</td>";
                                     echo "<td>$status</td>";
+                                    // Show cancel button if status is pending
+                                    // If the status is not pending then show nothing
+                                    if ($status == "Pending") {
+                                        echo "<td><a href='components/cancel_booking.php?id=$bookingId' class='btn btn-danger'>Cancel</a></td>";
+                                    } else {
+                                        echo "<td></td>";
+                                    }
                                     echo "</tr>";
                                 }
                                 ?>
