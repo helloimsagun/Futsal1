@@ -91,10 +91,10 @@ p2 {
                 <div class="reg_msg">
                     <?php
                    if($showAlert){
-                    echo '<p2 style="padding: 35px 0 0 30px;"> <strong>Account created successfully!!</strong></p2>';
+                    echo '<p2 style="padding: 0px 0 0 30px;"> <strong>Account created successfully!!</strong></p2>';
                    }
                     if($wrongPassword){
-                        echo '<p1 style="padding: 35px 0 0 30px;"> <strong>Error!</strong> Password do not match.</p1>';
+                        echo '<p1 style="padding: 0px 0 0 30px;"> <strong>Error!</strong> Password do not match.</p1>';
                     }
                     if($showError){
                         echo '<p1> <strong>Error!!</strong> The user id that you have entered already exists.</p1>';
