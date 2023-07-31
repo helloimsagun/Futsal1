@@ -101,26 +101,32 @@ session_start();
       break;
     }
   }
-  ?><section class="page-section section-bg" id="book" style="padding-top: 10em;">
+  ?>
+  <section class="page-section section-bg" id="book" style="padding-top: 10em;">
     <div class="container">
 
       <?php
-      // Execute the SQL query to fetch futsal fields data
-      include 'components/_dbconnect.php';
+      // Loop through the recommended futsals based on similarity
+      foreach ($targetSimilarities as $futsalId => $similarity) {
+        // Skip the target futsal itself
+        if ($futsalId == $targetFutsalId) {
+          continue;
+        }
 
-      $sql = "SELECT * FROM futsals WHERE id = $futsalId";
-      $result = mysqli_query($con, $sql);
+        // Execute the SQL query to fetch futsal fields data
+        $sql = "SELECT * FROM futsals WHERE id = $futsalId";
+        $result = mysqli_query($con, $sql);
 
-      // Loop through the results and generate HTML dynamically
-      while ($row = mysqli_fetch_assoc($result)) {
-        $name = $row['name'];
-        $type = $row['type'];
-        $image = $row['image'];
-        $fieldId = $row['id'];
+        // Loop through the results and generate HTML dynamically
+        while ($row = mysqli_fetch_assoc($result)) {
+          $name = $row['name'];
+          $type = $row['type'];
+          $image = $row['image'];
+          $fieldId = $row['id'];
 
-        $dimension = ($type == '5A') ? 'Type: 5A' : 'Type: 7A';
+          $dimension = ($type == '5A') ? 'Type: 5A' : 'Type: 7A';
 
-        echo '
+          echo '
       <div class="card" data-aos="fade-left" data-aos-delay="500">
           <div class="card-header">
               <img src="assets/img/futsals/' . $image . '" alt="' . $name . '" />
@@ -140,43 +146,44 @@ session_start();
           </div>
           
               ';
-                    // Retrieve and display the attributes
-                    $sqlAttributes = "SELECT attribute, value FROM futsal_attributes WHERE futsalid = $targetFutsalId";
-                    $resultAttributes = mysqli_query($con, $sqlAttributes);
+          // Retrieve and display the attributes
+          $sqlAttributes = "SELECT attribute, value FROM futsal_attributes WHERE futsalid = $futsalId";
+          $resultAttributes = mysqli_query($con, $sqlAttributes);
 
-                    if (mysqli_num_rows($resultAttributes) > 0) {
-                        echo '<p><b>Attributes:</b></p>';
+          if (mysqli_num_rows($resultAttributes) > 0) {
+            echo '<p><b>Attributes:</b></p>';
 
-                        while ($rowAttribute = mysqli_fetch_assoc($resultAttributes)) {
-                            $attribute = $rowAttribute['attribute'];
-                            $value = $rowAttribute['value'];
-                            if($value == 1){
-                                echo  $attribute.'  ';
-                            }
-                            // echo  $attribute . ': ' . ($value ? 'Yes' : 'No');
-                        }
-
-                    } else {
-                        echo '<p>No attributes found.</p>';
-                    }
-        if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
-          echo '<a href="components/login.php" class="book">Book Now</a>';
-        } else {
-          echo '
+            while ($rowAttribute = mysqli_fetch_assoc($resultAttributes)) {
+              $attribute = $rowAttribute['attribute'];
+              $value = $rowAttribute['value'];
+              if ($value == 1) {
+                echo  $attribute . '  ';
+              }
+              // echo  $attribute . ': ' . ($value ? 'Yes' : 'No');
+            }
+          } else {
+            echo '<p>No attributes found.</p>';
+          }
+          if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
+            echo '<a href="components/login.php" class="book">Book Now</a>';
+          } else {
+            echo '
               <form action="components/bookingDate.php" method="POST">
                   <input type="hidden" name="fieldid" value="' . $fieldId . '">
                   <button type="submit" class="book">Book Now</button>
               </form>';
-        }
+          }
 
-        echo '
+          echo '
           </div>
       </div>';
+        }
       }
       ?>
 
     </div>
-  </section>
+</section>
+
 
 
   <section class="page-section" style="padding-top: 10em;">
