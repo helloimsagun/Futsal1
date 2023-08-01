@@ -100,6 +100,14 @@ include_once('components/_dbconnect.php');
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="admin_futsal.php" class="nav-link">
+                                <i class="nav-icon fas fa-futbol"></i>
+                                <p>
+                                    Futsal
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="admin_profile.php" class="nav-link">
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>

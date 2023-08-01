@@ -9,7 +9,7 @@ $userId = $_SESSION['userid'];
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Futsal - Orders</title>
+    <title>Futsal - Profile</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -99,6 +99,14 @@ $userId = $_SESSION['userid'];
                                 <i class="nav-icon fas fa-credit-card"></i>
                                 <p>
                                     Bookings
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="admin_futsal.php" class="nav-link">
+                                <i class="nav-icon fas fa-futbol"></i>
+                                <p>
+                                    Futsal
                                 </p>
                             </a>
                         </li>

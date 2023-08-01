@@ -9,7 +9,7 @@ $userId = $_SESSION['userid'];
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Futsal - Bookings</title>
+    <title>Futsal - Futsals</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -95,7 +95,7 @@ $userId = $_SESSION['userid'];
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="admin_bookings.php" class="nav-link active">
+                            <a href="admin_bookings.php" class="nav-link">
                                 <i class="nav-icon fas fa-credit-card"></i>
                                 <p>
                                     Bookings
@@ -103,7 +103,7 @@ $userId = $_SESSION['userid'];
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="admin_futsal.php" class="nav-link">
+                            <a href="admin_futsal.php" class="nav-link active">
                                 <i class="nav-icon fas fa-futbol"></i>
                                 <p>
                                     Futsal
@@ -140,63 +140,51 @@ $userId = $_SESSION['userid'];
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Bookings</h1>
+                            <h1 class="m-0">Futsal</h1>
                         </div><!-- /.col -->
+                        <div class="mt-3">
+                            <a href="add_futsal.php" class="btn btn-success">Add Futsal</a>
+                        </div>
                     </div><!-- /.row -->
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Booking ID</th>
+                                    <th>Field ID</th>
                                     <th>Field Type</th>
-                                    <th>Name</th>
-                                    <th>Phone</th>
-                                    <th>Requested Date</th>
-                                    <th>Futsal Name</th>
+                                    <th>Field Name</th>
                                     <th>Futsal Contact</th>
-                                    <th>Price</th>
-                                    <th>Time</th>
-                                    <th>Status</th>
+                                    <th>Address</th>
+                                    <th>Image</th>
+                                    <th>Description</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $sql = "SELECT booking.id, futsals.type, booking.name, booking.phone, booking.date, futsals.name AS futsal_name, futsals.phone AS futsal_phone, booking.price, booking.time, booking.status
-                    FROM booking
-                    INNER JOIN futsals ON booking.fieldid = futsals.id
-                    ";
+                                $sql = "SELECT futsals.id AS field_id, futsals.type AS field_type, futsals.name AS field_name, futsals.phone AS futsal_contact, futsals.image, futsals.description, futsals.type, futsals.address, futsals.phone, futsals.image, futsals.description, futsals.type
+        FROM futsals";
                                 $result = mysqli_query($con, $sql);
 
                                 while ($row = mysqli_fetch_assoc($result)) {
-                                    $bookingId = $row['id'];
-                                    $fieldType = $row['type'];
-                                    $name = $row['name'];
-                                    $phone = $row['phone'];
-                                    $date = $row['date'];
-                                    $futsalName = $row['futsal_name'];
-                                    $futsalPhone = $row['futsal_phone'];
-                                    $price = $row['price'];
-                                    $time = $row['time'];
-                                    $status = $row['status'];
+                                    $fieldId = $row['field_id'];
+                                    $fieldType = $row['field_type'];
+                                    $fieldName = $row['field_name'];
+                                    $futsalContact = $row['futsal_contact'];
+                                    $address = $row['address'];
+                                    $image = $row['image'];
+                                    $description = $row['description'];
 
                                     echo "<tr>";
-                                    echo "<td>$bookingId</td>";
+                                    echo "<td>$fieldId</td>";
                                     echo "<td>$fieldType</td>";
-                                    echo "<td>$name</td>";
-                                    echo "<td>$phone</td>";
-                                    echo "<td>$date</td>";
-                                    echo "<td>$futsalName</td>";
-                                    echo "<td>$futsalPhone</td>";
-                                    echo "<td>$price</td>";
-                                    echo "<td>$time</td>";
-                                    echo "<td>$status</td>";
-                                    // Check if the status is "Pending"
-                                    if ($status === 'Pending') {
-                                        echo "<td><a href='components/admin_approve.php?id=$bookingId' class='btn btn-success'>Approve</a> <a href='components/admin_reject.php?id=$bookingId' class='btn btn-danger'>Reject</a></td>";
-                                    } else {
-                                        echo "<td></td>";
-                                    }
+                                    echo "<td>$fieldName</td>";
+                                    echo "<td>$futsalContact</td>";
+                                    echo "<td>$address</td>";
+                                    echo "<td><img src='assets/img/futsals/$image' alt='$fieldName' width='100'></td>";
+                                    echo "<td>$description</td>";
+                                    echo "<td><a href='edit_futsal.php?id=$fieldId' class='btn btn-primary'>Edit Futsal</a>";
+                                    echo "<a href='edit_attribute.php?id=$fieldId' class='btn btn-info'>Edit Attribute</a></td>";
                                     echo "</tr>";
                                 }
                                 ?>
