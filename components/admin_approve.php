@@ -3,7 +3,7 @@ include_once '_dbconnect.php';
 $booking_id = $_GET['id'];
 
 
-$sql = "UPDATE booking SET status = 'Completed' WHERE id = '$booking_id'";
+$sql = "UPDATE booking SET status = 'Accepted' WHERE id = '$booking_id'";
 // use mysqli
 
 if ($con->query($sql) === TRUE) {

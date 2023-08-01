@@ -68,7 +68,7 @@ $userId = $_SESSION['userid'];
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="index.php" class="brand-link">
-            <img src="images\logo.png" alt="Futsal Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="images\logo.png" alt="Futsal Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Futsal Booking</span>
             </a>
             <!-- Sidebar -->
@@ -183,7 +183,12 @@ $userId = $_SESSION['userid'];
                                     echo "<td>$price</td>";
                                     echo "<td>$time</td>";
                                     echo "<td>$status</td>";
-                                    echo "<td><a href='components/admin_pending.php?id=$bookingId' class='btn btn-success'>Pending</a><a href='components/admin_approve.php?id=$bookingId' class='btn btn-success'>Approve</a> <a href='components/admin_reject.php?id=$bookingId' class='btn btn-danger'>Reject</a></td>";
+                                    // Check if the status is "Pending"
+                                    if ($status === 'Pending') {
+                                        echo "<td><a href='components/admin_approve.php?id=$bookingId' class='btn btn-success'>Approve</a> <a href='components/admin_reject.php?id=$bookingId' class='btn btn-danger'>Reject</a></td>";
+                                    } else {
+                                        echo "<td></td>";
+                                    }
                                     echo "</tr>";
                                 }
                                 ?>

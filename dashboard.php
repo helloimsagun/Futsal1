@@ -141,7 +141,7 @@ include_once('components/_dbconnect.php');
                     $pendingCount = $rowPending['pendingCount'];
 
                     // Count completed bookings
-                    $sqlCompleted = "SELECT COUNT(*) AS completedCount FROM booking WHERE userid = '" . $_SESSION['userid']. "' AND status = 'Completed'";
+                    $sqlCompleted = "SELECT COUNT(*) AS completedCount FROM booking WHERE userid = '" . $_SESSION['userid']. "' AND status = 'Accepted'";
                     $resultCompleted = mysqli_query($con, $sqlCompleted);
                     $rowCompleted = mysqli_fetch_assoc($resultCompleted);
                     $completedCount = $rowCompleted['completedCount'];

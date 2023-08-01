@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
                                 $optionEndTime = date('gA', $nextTime);
 
                                 // Check if the time slot is already in the database
-                                $query = "SELECT * FROM booking WHERE time = '$optionTime-$optionEndTime' AND date='$date' AND fieldid=$fieldid";
+                                $query = "SELECT * FROM booking WHERE time = '$optionTime-$optionEndTime' AND date='$date' AND fieldid=$fieldid AND (status='Accepted' OR status='Pending')";
                                 $result = mysqli_query($con, $query);
 
                                 if (mysqli_num_rows($result) == 0) {
